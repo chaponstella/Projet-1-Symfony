@@ -12,11 +12,13 @@
 
     {% block stylesheets %}
     
-{% endblock stylesheets %}  
-
-</head>
+    {% endblock stylesheets %}  
+    
+  </head>
   <body>
-      <div class="container mt-3">
+   <h1 class="container mt-4">{% block h1 %}{% endblock %}</h1> 
+   <hr>
+      <div class="container mt-4">
       {% block body %}
           
       {% endblock body %}

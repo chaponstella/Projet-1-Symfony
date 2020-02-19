@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,7 +18,7 @@ class ArticlesController extends AbstractController
     }
 
     /**
-     * @Route("/articles", name="articles")
+     * @Route("/articles", methods={"GET"}, name="articles")
      */
     public function index(): Response
     {
@@ -37,4 +38,13 @@ class ArticlesController extends AbstractController
             'articleId' => $id
         ]);
     }
+
+      /**
+     * @Route("/articles/", methods={"POST"}, name="article_create")
+     */ 
+    public function create(Request $request)
+    {
+        dd($request);
+    }
+
 }
