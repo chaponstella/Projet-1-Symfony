@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+Bienvenue sur la page de l'article numero {{categorie.id}}
+<hr>
+
+<tbody>
+
+<tr><br>
+    <td>Titre: {{ categorie.title }}</td><br>
+    <td>Categorie: {{ categorie.description }}</td><br>
+</tr>
+
+</tbody>
+{% endblock  %}

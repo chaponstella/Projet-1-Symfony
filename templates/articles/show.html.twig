@@ -2,6 +2,17 @@
 
 {% block body %}
 
-Bienvenue sur la page de l'article numero {{articleId}}
+Bienvenue sur la page de l'article numero {{article.id}}
+<hr>
 
-{% endblock body %}
+<tbody>
+
+<tr><br>
+    <td>{{ article.title }}</td><br>
+    <td>{{ article.content }}</td><br>
+    <td>{{ article.tags }}</td><br>
+    <td>{{ article.createdAt|date('d/m/Y')}}</td><br>
+</tr>
+
+</tbody>
+{% endblock  %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %} Ajouter un Article{% endblock %}
+{% block title %}Hello CategoryController!{% endblock %}
 
 {% block body %}
 
@@ -8,4 +8,5 @@
 {{ form_widget(form) }}
 <button class="btn btn-success">Envoyer</button>
 {{ form_end(form) }}
-{% endblock body %}
+
+{% endblock %}

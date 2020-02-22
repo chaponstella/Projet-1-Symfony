@@ -1,20 +1,77 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello ArticlesController!{% endblock %}
-
-{% block body %}
+{% extends 'base.html.twig' %} 
+{% block title %}Hello ArticlesController!{%
+endblock %} {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+  .example-wrapper {
+    margin: 1em auto;
+    max-width: 800px;
+    width: 95%;
+    font: 18px/1.5 sans-serif;
+  }
+  .example-wrapper code {
+    background: #f5f5f5;
+    padding: 2px 6px;
+  }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="mb-3">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/HB/Documents/HumanBooster/Cours Symfony/Projet 1/blog/src/Controller/ArticlesController.php'|file_link(0) }}">src/Controller/ArticlesController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/HB/Documents/HumanBooster/Cours Symfony/Projet 1/blog/templates/articles/index.html.twig'|file_link(0) }}">templates/articles/index.html.twig</a></code></li>
-    </ul>
+    <h1>Rechercher un article:</h1>
+
+<form action="{{path('article_search')}}" methode="get" class="form">
+    <input id= "searchInput" name="search" class="form-control" type="text" placeholder="Rechercher un article">
+</form>
 </div>
+
+<tbody>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th># Title</th>
+        <th># Content</th>
+        <th># Tags</th>
+        <th># Catégorie</th>
+        <th># Date</th>
+
+       
+    </tr>
+    </thead>
+    <tbody>
+    <h1>Liste d'articles</h1>
+    {% for article in articles %}
+
+    <tr>
+        <td>{{ article.id }}</td>
+
+        <td><a href="{{path('articles_show', {'article' : article.id})}}">{{ article.title }}</td></a>
+        <td>{{ article.content }}</td>
+        <td>{{ article.tags }}</td>
+        <td>{{ article.category.title }}</td>
+        <td>{{ article.createdAt|date('d/m/Y')}}  <i class="fa fa-eye btn btn-primary ml-5"></i> <i class="fa fa-trash btn btn-danger ml-3" ></i></td>
+        
+
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</tbody>
 {% endblock %}
+
+
+{% block javascripts %}
+
+<script>
+    let searchInput = document.getElementById('searchField');
+    searchInput.addEventListener("keypress", function(el) {
+        if ( el.target.value.length < 3 ) {
+            if (event.which === 13) {
+                el.preventDefault();
+                alert('Minimum 3 caractères.');
+            }
+        }
+    })
+</script>
+    
+{% endblock javascripts %}

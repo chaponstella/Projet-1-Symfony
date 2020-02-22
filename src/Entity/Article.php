@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
@@ -18,16 +21,19 @@ class Article
     private $id;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
+     *  @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Your first name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters")
      */
+
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $short_content;
-
-    /**
+     *
      * @ORM\Column(type="text")
      */
     private $content;
@@ -42,8 +48,16 @@ class Article
      */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
+     */
+    private $category;
+
+ 
+
     public function __construct() {
         $this-> setCreatedAt(new DateTime());
+        $this->articles = new ArrayCollection();
     }
 
 
@@ -64,17 +78,6 @@ class Article
         return $this;
     }
 
-    public function getShortContent(): ?string
-    {
-        return $this->short_content;
-    }
-
-    public function setShortContent(?string $short_content): self
-    {
-        $this->short_content = $short_content;
-
-        return $this;
-    }
 
     public function getContent(): ?string
     {
@@ -111,4 +114,17 @@ class Article
 
         return $this;
     }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
 }
